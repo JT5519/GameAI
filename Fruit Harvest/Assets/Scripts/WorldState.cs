@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//The state of the garden can be defined as the state of 4 things: the flower bushel, the tree groves, the statue and the resource chest
 public class WorldState
 {
+    //enums to enumerate states of the gardens resources
+    /*There are four points of interest in the garden:
+        - The flower bushel that needs to be watered
+        - The Tree grove that needs its fruits plucked
+        - The Statue that needs to be worshiped
+        - The resource chest that contains the resources to pluck fruits (maybe a net) and water the flowers (a water can)*/
     public enum FlowerBushel : int
     {
         ignore = -1,
@@ -29,7 +35,7 @@ public class WorldState
         empty = 1
     }
 
-
+    //state parameters of the world
     public FlowerBushel flowerState;
     public TreeGrove treeState;
     public StatueRegion statueState;

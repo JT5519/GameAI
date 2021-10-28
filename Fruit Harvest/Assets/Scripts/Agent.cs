@@ -28,8 +28,15 @@ public class Agent : MonoBehaviour
 
     Planner planner; //planner
 
-    public float moveSpeed;
+    public float moveSpeed; //agent movement speed
 
+    enum ActionCompletionState : int
+    {
+        ignore, toDo, done
+    } //enum to check action completion status
+    ActionCompletionState actionCompletionState;
+
+    //function to populate agents allowed action set
     void fillActionArray()
     {
         //creating positions in list
@@ -58,6 +65,7 @@ public class Agent : MonoBehaviour
             new WorldState(WorldState.FlowerBushel.ignore, WorldState.TreeGrove.ignore, WorldState.StatueRegion.ignore, WorldState.ResourceChest.empty),
             4,true,possibleTargets[targetNames.chest]);
     }
+    //function to populate targets dictionary 
     void fillTargetDict()
     {
         possibleTargets.Add(targetNames.trees, GameObject.Find("Trees"));
@@ -84,38 +92,57 @@ public class Agent : MonoBehaviour
         pauseFSMUpdate = false;
         //Planner object
         planner = new Planner();
+        //action completion status
+        actionCompletionState = ActionCompletionState.ignore;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if action queue is empty, call for a new plan
         if (actionQueue.Count == 0)
             actionQueue = planner.buildActionQueue(possibleActions, currentWorldState, desiredWorldState);
+        //update the FSM based on actions in the action queue
         FSMUpdate();
     }
     void FSMUpdate()
     {
+        //return if FSM update is paused for now
         if (pauseFSMUpdate)
             return;
+        //if planner returned an empty action queue, set state to idle
         if (actionQueue.Count == 0)
             fsm.SetState(FSM.FSMState.Idle);
         else
         {
             Actions nextAction = actionQueue.Dequeue();
-            if(nextAction.requiresInRange && !nextAction.isInRange(gameObject))
+            Debug.Log("Action to be done: " + (Agent.actionNames)(nextAction.actionCost - 1));
+
+            //if next action needs moving to a position then set FSM state to move
+            if (nextAction.requiresInRange && !nextAction.isInRange(gameObject))
             {
+                Debug.Log("Moving towards target: "+nextAction.target.name);
                 fsm.SetState(FSM.FSMState.Move);
-                pauseFSMUpdate = true;
-                StartCoroutine(AgentMove(nextAction));
+                pauseFSMUpdate = true; //wait while movememnt is happening
+                actionCompletionState = ActionCompletionState.toDo;
+                StartCoroutine(AgentMove(nextAction)); //begin move
             }
             else
-            {
-                fsm.SetState(FSM.FSMState.Action);
-                nextAction.doAction(currentWorldState);
-            }
+                AgentAct(nextAction);
         }
 
     }
+    void AgentAct(Actions action) //do action on the word
+    {
+        fsm.SetState(FSM.FSMState.Action);
+        Debug.Log("World state before action: " + currentWorldState.ToString());
+        action.doAction(currentWorldState);
+        Debug.Log("Action commited");
+        Debug.Log("World state after action: " + currentWorldState.ToString());
+        if (actionCompletionState == ActionCompletionState.toDo)
+            actionCompletionState = ActionCompletionState.done;
+    }
+    //coroutine to control player movement
     public IEnumerator AgentMove(Actions action)
     {
         while(!action.isInRange(gameObject))
@@ -125,5 +152,9 @@ public class Agent : MonoBehaviour
         }
         if (pauseFSMUpdate)
             pauseFSMUpdate = false;
+        Debug.Log("Movement complete");
+        //movemement complete, time to act
+        if (actionCompletionState == ActionCompletionState.toDo)
+            AgentAct(action);
     }
 }

@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//class created for actions
 public class Actions
 {
+    //action parameters
     public WorldState actionPreCondition;
     public WorldState actionEffect;
     public int actionCost;
     public bool requiresInRange;
-    public GameObject target;
+    public GameObject target; //target of the action
 
-    public void doAction(WorldState state)
+    public void doAction(WorldState state) //modify the current word state based on the action done
     {
         if(actionEffect.flowerState!=WorldState.FlowerBushel.ignore)
             state.flowerState = actionEffect.flowerState;
@@ -21,7 +23,7 @@ public class Actions
         if (actionEffect.chestState != WorldState.ResourceChest.ignore)
             state.chestState = actionEffect.chestState;
     }
-    public bool isActionPossible(WorldState state)
+    public bool isActionPossible(WorldState state) //check if action preconditions are satisfied
     {
         if (actionPreCondition.flowerState != WorldState.FlowerBushel.ignore && actionPreCondition.flowerState != state.flowerState)
             return false;
@@ -33,7 +35,7 @@ public class Actions
             return false;
         return true;
     }
-    public bool isInRange(GameObject agentPosition)
+    public bool isInRange(GameObject agentPosition) //check if agent is in range to do the action
     {
         if (!requiresInRange)
             return true;
@@ -50,13 +52,4 @@ public class Actions
         this.requiresInRange = needsR;
         this.target = targ;
     }
-    public Actions(Actions actionToCopy)
-    {
-        this.actionPreCondition = actionToCopy.actionPreCondition;
-        this.actionEffect = actionToCopy.actionEffect; ;
-        this.actionCost = actionToCopy.actionCost; ;
-        this.requiresInRange = actionToCopy.requiresInRange; ;
-        this.target = actionToCopy.target; ;
-    }
-
 }
