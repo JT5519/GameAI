@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Actions">
+    <Position X="13.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAABAAAAAAAAAIAAAAAAhAAAAAIAACAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Actions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Agent">
+    <Position X="11.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Agent.actionNames" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Agent.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Agent.targetNames" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Agent.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Agent.ActionCompletionState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Agent.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAHiQACAAAIAAAAABAAAAgABACAIABAABAAgA=</HashCode>
+      <FileName>Assets\Scripts\Agent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FSM">
+    <Position X="7.25" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="FSM.FSMState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\FSM.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABEAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\FSM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Planner">
+    <Position X="15.5" Y="1" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Planner.Node">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Planner.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Planner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorldState">
+    <Position X="9" Y="1" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="WorldState.FlowerBushel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\WorldState.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="WorldState.TreeGrove" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\WorldState.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="WorldState.StatueRegion" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\WorldState.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="WorldState.ResourceChest" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\WorldState.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAEAAAAAAAAAAAIAAEABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\WorldState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
