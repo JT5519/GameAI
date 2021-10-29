@@ -116,12 +116,12 @@ public class Agent : MonoBehaviour
         else
         {
             Actions nextAction = actionQueue.Dequeue();
-            //Debug.Log("Action to be done: " + (Agent.actionNames)(nextAction.actionCost - 1));
+            Debug.Log("Action to be done: " + (Agent.actionNames)(nextAction.actionCost - 1));
 
             //if next action needs moving to a position then set FSM state to move
             if (nextAction.requiresInRange && !nextAction.isInRange(gameObject))
             {
-                //Debug.Log("Moving towards target: "+nextAction.target.name);
+                Debug.Log("Moving towards target: "+nextAction.target.name);
                 fsm.SetState(FSM.FSMState.Move);
                 pauseFSMUpdate = true; //wait while movememnt is happening
                 actionCompletionState = ActionCompletionState.toDo;
@@ -135,10 +135,10 @@ public class Agent : MonoBehaviour
     void AgentAct(Actions action) //do action on the word
     {
         fsm.SetState(FSM.FSMState.Action);
-        //Debug.Log("World state before action: " + currentWorldState.ToString());
+        Debug.Log("World state before action: " + currentWorldState.ToString());
         action.doAction(currentWorldState);
-        //Debug.Log("Action commited");
-        //Debug.Log("World state after action: " + currentWorldState.ToString());
+        Debug.Log("Action commited");
+        Debug.Log("World state after action: " + currentWorldState.ToString());
         if (actionCompletionState == ActionCompletionState.toDo)
             actionCompletionState = ActionCompletionState.done;
     }
@@ -152,7 +152,7 @@ public class Agent : MonoBehaviour
         }
         if (pauseFSMUpdate)
             pauseFSMUpdate = false;
-        //Debug.Log("Movement complete");
+        Debug.Log("Movement complete");
         //movemement complete, time to act
         if (actionCompletionState == ActionCompletionState.toDo)
             AgentAct(action);
